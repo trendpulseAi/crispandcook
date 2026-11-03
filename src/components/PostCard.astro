@@ -1,0 +1,13 @@
+---
+import { Image } from 'astro:assets';
+const { post } = Astro.props;
+const d = post.data;
+---
+<a class="post-card" href={`/recipes/${post.id}/`}>
+  <Image src={d.image} alt={d.imageAlt} width={480} height={360} />
+  <div class="pc-body">
+    <span class="tag">{d.appliance}</span>
+    <h3>{d.title}</h3>
+    <p class="small">{d.prepMinutes + d.cookMinutes} min · {d.servings} servings</p>
+  </div>
+</a>

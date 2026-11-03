@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import { SITE } from '../site.config.mjs';
+interface Props { title: string; description: string; image?: string; type?: string; noindex?: boolean }
+const { title, description, image, type = 'website', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE.url).toString();
+const fullTitle = title === SITE.name ? `${SITE.name} | ${SITE.tagline}` : `${title} | ${SITE.name}`;
+const ogImage = image ? new URL(image, SITE.url).toString() : undefined;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="pinterest-rich-pin" content="true" />
+    <slot name="head" />
+    {SITE.ga4Id && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4Id}`}></script>
+        <script is:inline define:vars={{ id: SITE.ga4Id }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date()); gtag('config', id);
+        </script>
+      </>
+    )}
+    {SITE.adsenseClient && (
+      <script is:inline async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClient}`} crossorigin="anonymous"></script>
+    )}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="/" class="logo">Crisp <span>&amp;</span> Cook</a>
+        <nav>
+          <a href="/recipes/">Recipes</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><strong>{SITE.name}</strong> — {SITE.tagline}</p>
+        <p class="small">
+          <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/disclosure/">Affiliate Disclosure</a>
+        </p>
+        <p class="small">© {new Date().getFullYear()} {SITE.name}. As an Amazon Associate we earn from qualifying purchases.</p>
+      </div>
+    </footer>
+    {SITE.adsterraSocialBarSrc && <script is:inline src={SITE.adsterraSocialBarSrc}></script>}
+  </body>
+</html>

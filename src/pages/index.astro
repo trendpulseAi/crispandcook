@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import { getPublishedRecipes } from '../lib';
+import { SITE } from '../site.config.mjs';
+const posts = await getPublishedRecipes();
+const appliances = ['Air Fryer', 'Rice Cooker'];
+---
+<Base title={SITE.name} description="Quick, budget-friendly air fryer and rice cooker recipes with exact times, temps, and smart ingredient swaps.">
+  <section class="hero">
+    <h1>Fast dinners, <em>crispy</em> results.</h1>
+    <p>Simple air fryer and rice cooker recipes with exact times, temperatures, and smart swaps — most ready in 15–30 minutes.</p>
+    <div class="hero-links">{appliances.map((a) => <a class="btn" href={`/recipes/#${a.toLowerCase().replace(' ', '-')}`}>{a} Recipes</a>)}</div>
+  </section>
+  <h2>Latest recipes</h2>
+  <div class="grid">{posts.slice(0, 12).map((p) => <PostCard post={p} />)}</div>
+</Base>

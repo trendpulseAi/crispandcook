@@ -1,0 +1,18 @@
+---
+// In-content ad slot. Uses AdSense auto/responsive units when configured, otherwise Adsterra native, otherwise nothing.
+import { SITE } from '../site.config.mjs';
+interface Props { kind?: 'adsense' | 'native' }
+const { kind = 'adsense' } = Astro.props;
+---
+{kind === 'adsense' && SITE.adsenseClient && (
+  <div class="ad-slot" aria-label="Advertisement">
+    <ins class="adsbygoogle" style="display:block" data-ad-client={SITE.adsenseClient} data-ad-format="fluid" data-ad-layout="in-article"></ins>
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}
+{kind === 'native' && SITE.adsterraNativeSrc && (
+  <div class="ad-slot" aria-label="Advertisement">
+    <script is:inline async data-cfasync="false" src={SITE.adsterraNativeSrc}></script>
+    <div id={SITE.adsterraNativeContainerId}></div>
+  </div>
+)}

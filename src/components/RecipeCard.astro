@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import { SITE } from '../site.config.mjs';
+import { withAmazonTag } from '../lib';
+const { data } = Astro.props;
+const total = data.prepMinutes + data.cookMinutes;
+---
+<section id="recipe" class="recipe-card">
+  <div class="rc-head">
+    <Image src={data.image} alt={data.imageAlt} width={240} height={240} class="rc-thumb" />
+    <div>
+      <h2>{data.title}</h2>
+      <p>{data.description}</p>
+      <button class="btn btn-ghost no-print" onclick="window.print()">🖨️ Print Recipe</button>
+    </div>
+  </div>
+  <ul class="rc-meta">
+    <li><span>Prep</span>{data.prepMinutes} min</li>
+    <li><span>Cook</span>{data.cookMinutes} min</li>
+    <li><span>Total</span>{total} min</li>
+    <li><span>Servings</span>{data.servings}</li>
+    {data.calories && <li><span>Calories</span>{data.calories}</li>}
+    <li><span>Appliance</span>{data.appliance}</li>
+  </ul>
+  {data.equipment.length > 0 && (
+    <div class="rc-block no-print">
+      <h3>Equipment</h3>
+      <ul>
+        {data.equipment.map((e) => (
+          <li><a href={withAmazonTag(e.url, SITE.amazonTag)} rel="nofollow sponsored noopener" target="_blank">{e.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  )}
+  <div class="rc-block">
+    <h3>Ingredients</h3>
+    <ul class="checklist">
+      {data.ingredients.map((i) => <li><label><input type="checkbox" /> <strong>{i.amount}</strong> {i.item}</label></li>)}
+    </ul>
+  </div>
+  <div class="rc-block">
+    <h3>Instructions</h3>
+    <ol>{data.steps.map((s) => <li><strong>{s.title}.</strong> {s.text}</li>)}</ol>
+  </div>
+  {data.calories && <p class="small">Nutrition is an estimate per serving and will vary by brand and portion size.</p>}
+</section>

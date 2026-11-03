@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedRecipes } from '../../lib';
+const posts = await getPublishedRecipes();
+const groups = [...new Set(posts.map((p) => p.data.appliance))];
+---
+<Base title="All Recipes" description="Browse every air fryer, rice cooker, and 15-minute recipe on Crisp & Cook.">
+  <h1>All Recipes</h1>
+  {groups.map((g) => (
+    <section id={g.toLowerCase().replace(' ', '-')}>
+      <h2>{g}</h2>
+      <div class="grid">{posts.filter((p) => p.data.appliance === g).map((p) => <PostCard post={p} />)}</div>
+    </section>
+  ))}
+</Base>

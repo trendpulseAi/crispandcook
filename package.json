@@ -1,0 +1,17 @@
+{
+  "name": "crispandcook",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "new": "node scripts/new-post.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.4.5",
+    "@astrojs/sitemap": "^3.7.4",
+    "sharp": "^0.35.5"
+  }
+}

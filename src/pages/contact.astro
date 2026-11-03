@@ -1,0 +1,9 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../site.config.mjs';
+---
+<Page title="Contact" description="Contact the Crisp & Cook team.">
+  <p>We'd love to hear from you — recipe questions, requests, feedback, or partnership inquiries.</p>
+  <p>📧 Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+  <p>We usually reply within 2–3 business days.</p>
+</Page>
