@@ -2,7 +2,7 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const recipes = defineCollection({
-  loader: glob({ pattern: '**/index.md', base: './src/content/recipes' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/recipes' }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
