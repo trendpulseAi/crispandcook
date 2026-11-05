@@ -2,22 +2,48 @@
 import Page from '../layouts/Page.astro';
 import { SITE } from '../site.config.mjs';
 ---
-<Page title="Privacy Policy" description="Privacy policy for Crisp & Cook.">
-  <p class="small">Last updated: November 3, 2026</p>
-  <p>This Privacy Policy explains how {SITE.name} ("we", "us") at {SITE.url} collects and uses information when you visit our website.</p>
-  <h2>Information we collect</h2>
-  <p>We do not require you to create an account. We automatically collect standard, non-identifying data such as browser type, device, pages visited, and approximate location through analytics tools (Google Analytics). If you email us, we receive your email address and message.</p>
-  <h2>Cookies</h2>
-  <p>We and our partners use cookies and similar technologies to analyze traffic, remember preferences, and show advertising. You can disable cookies in your browser settings.</p>
-  <h2>Advertising</h2>
-  <p>We use third-party advertising companies, including Google AdSense, to serve ads. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visits to this and/or other sites on the Internet.</p>
-  <p>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" rel="nofollow">Google Ads Settings</a>, or opt out of some third-party vendors' use of cookies at <a href="https://www.aboutads.info/choices/" rel="nofollow">www.aboutads.info</a>. See <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow">how Google uses information from sites that use its services</a>.</p>
-  <h2>Affiliate links</h2>
-  <p>We participate in affiliate programs such as Amazon Associates. When you click an affiliate link, the retailer may set cookies to track the referral.</p>
-  <h2>Your rights (GDPR / CCPA)</h2>
-  <p>Depending on where you live, you may have the right to access, correct, or delete your personal data, and to object to its processing. Visitors from the EEA and UK will see a consent message for personalized ads. Contact us to make a request.</p>
-  <h2>Children</h2>
-  <p>This site is not directed at children under 13, and we do not knowingly collect their data.</p>
-  <h2>Contact</h2>
-  <p>Questions? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+<Page title="Privacy Policy" description="Privacy Policy for Crisp & Cook explaining how we collect, use, and protect your data, cookies, and advertising preferences.">
+  <p><em>Last updated: November 5, 2026</em></p>
+
+  <p>This Privacy Policy explains how <strong>{SITE.name}</strong> ("we", "us", or "our") at <a href={SITE.url}>{SITE.url}</a> collects, uses, and safeguards information when you visit our website.</p>
+
+  <h2>1. Information We Collect</h2>
+  <p>We do not require you to create an account to browse or use our recipes. Depending on how you interact with our site, we may collect:</p>
+  <ul>
+    <li><strong>Voluntary Information:</strong> If you contact us directly via email, we receive your email address, name (if provided), and the contents of your message so we can reply to your inquiry.</li>
+    <li><strong>Log Files &amp; Analytics Data:</strong> Like most websites, our servers and analytics tools (such as Google Analytics) automatically record standard, non-identifying technical data including your IP address, browser type, device type, operating system, referring/exit pages, date and time stamps, and pages visited. This data is used solely to analyze trends, administer the site, and improve user experience.</li>
+  </ul>
+
+  <h2>2. Cookies and Web Beacons</h2>
+  <p>We and our third-party partners use cookies, web beacons, and similar tracking technologies to analyze traffic, remember user preferences, and display relevant advertisements. You can choose to disable or selectively turn off cookies through your individual browser settings. More detailed information about cookie management with specific web browsers can be found on the browsers' respective websites.</p>
+
+  <h2>3. Third-Party Advertising (Google AdSense)</h2>
+  <p>We use third-party advertising companies, including <strong>Google AdSense</strong>, to serve ads when you visit our website:</p>
+  <ul>
+    <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites on the Internet.</li>
+    <li>Google's use of advertising cookies enables it and its partners to serve ads to our visitors based on their visit to this site and/or other sites on the Internet.</li>
+    <li>You may opt out of personalized advertising by visiting <a href="https://adssettings.google.com" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>. Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" rel="noopener noreferrer" target="_blank">www.aboutads.info</a>.</li>
+    <li>To learn more about how Google processes data, please see <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">How Google uses information from sites or apps that use our services</a>.</li>
+  </ul>
+
+  <h2>4. Affiliate Links Disclosure</h2>
+  <p><strong>{SITE.name}</strong> participates in affiliate marketing programs, including the Amazon Services LLC Associates Program. When you click on an affiliate link on our site, the retailer may place a cookie on your browser to track the referral for commission purposes at no additional cost to you. Please read our full <a href="/disclosure/">Affiliate Disclosure</a> for more details.</p>
+
+  <h2>5. Data Retention</h2>
+  <p>If you send us an email, we retain your message and email address only for as long as necessary to resolve your inquiry and maintain standard correspondence records. Aggregated, non-identifying analytics data is retained according to our analytics provider's standard retention settings.</p>
+
+  <h2>6. Your Privacy Rights (GDPR &amp; CCPA/CPRA)</h2>
+  <p>Depending on your location, including the European Economic Area (EEA), the United Kingdom, and California or other applicable US states, you may have the right to:</p>
+  <ul>
+    <li>Request access to, correction of, or deletion of any personal data we hold about you.</li>
+    <li>Object to or restrict the processing of your personal data.</li>
+    <li>Opt out of the "sale" or "sharing" of personal information for cross-context behavioral advertising. Note that we do not sell your personal information for monetary compensation.</li>
+  </ul>
+  <p>Visitors from the EEA and UK will be presented with a consent management banner to manage preferences for personalized advertising cookies. To exercise any of your privacy rights, please contact us using the email address below.</p>
+
+  <h2>7. Children's Information</h2>
+  <p>Our website is intended for a general audience and is not directed at children under the age of 13. We do not knowingly collect personally identifiable information from children under 13. If you believe that a child has provided personal information to us, please contact us immediately and we will promptly remove such data from our records.</p>
+
+  <h2>8. Contact Us</h2>
+  <p>If you have any questions about this Privacy Policy or our data practices, please email us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
 </Page>
