@@ -2,8 +2,18 @@
 import Page from '../layouts/Page.astro';
 import { SITE } from '../site.config.mjs';
 ---
-<Page title="Contact" description="Contact the Crisp & Cook team.">
-  <p>We'd love to hear from you — recipe questions, requests, feedback, or partnership inquiries.</p>
-  <p>📧 Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-  <p>We usually reply within 2–3 business days.</p>
+<Page title="Contact Us" description="Get in touch with Crisp & Cook for recipe questions, troubleshooting, feedback, or partnership inquiries.">
+  <p>We would love to hear from you! Whether you have a question about a specific cooking step, want to request a new air fryer or rice cooker recipe, or have feedback on the site, feel free to reach out.</p>
+
+  <h2>How to Reach Us</h2>
+  <p>📧 <strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+  <p>We read every message and usually reply within <strong>2–3 business days</strong>.</p>
+
+  <h2>How Can We Help?</h2>
+  <ul>
+    <li><strong>Recipe Questions &amp; Troubleshooting:</strong> If you have a question about a recipe on <strong>{SITE.name}</strong>, please include the recipe title and, if relevant, the type or size of air fryer or rice cooker you are using so we can give you the most helpful answer.</li>
+    <li><strong>Recipe Requests &amp; Feedback:</strong> Looking for a specific quick dinner or budget-friendly meal idea? Let us know what ingredients or appliances you want to see covered next.</li>
+    <li><strong>Advertising &amp; Partnerships:</strong> For media inquiries, brand collaborations, or advertising questions, please include <em>"Partnership Inquiry"</em> in your email subject line.</li>
+    <li><strong>Privacy &amp; Data Requests:</strong> For questions regarding our <a href="/privacy-policy/">Privacy Policy</a> or data rights requests (GDPR/CCPA), please include <em>"Privacy Request"</em> in the subject line.</li>
+  </ul>
 </Page>
