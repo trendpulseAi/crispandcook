@@ -6,7 +6,7 @@ const recipes = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      description: z.string().max(170),
+      description: z.string().max(500),
       date: z.coerce.date(),
       draft: z.boolean().default(false),
       appliance: z.enum(['Air Fryer', 'Rice Cooker', 'Stovetop', 'Oven', 'No-Cook']),
@@ -28,7 +28,12 @@ const recipes = defineCollection({
       proTips: z.array(z.string()).default([]),
       storage: z.string(),
       faqs: z.array(z.object({ q: z.string(), a: z.string() })).length(3),
-      equipment: z.array(z.object({ name: z.string(), url: z.string().url() })).default([]),
+      equipment: z.array(
+        z.union([
+          z.string(),
+          z.object({ name: z.string(), url: z.string().url().optional() })
+        ])
+      ).default([]),
     }),
 });
 
