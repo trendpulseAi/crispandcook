@@ -6,7 +6,7 @@ const recipes = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      description: z.string(), // Removed max(170) so descriptions never fail
+      description: z.string(), // Removed max(170) limit entirely
       date: z.coerce.date(),
       draft: z.boolean().default(false),
       appliance: z.string(),
@@ -26,7 +26,7 @@ const recipes = defineCollection({
       proTips: z.array(z.string()).default([]),
       storage: z.string().optional().default(''),
       faqs: z.array(z.any()).default([]),
-      equipment: z.any().default([]), // Accepts string, object, or empty array
+      equipment: z.any().default([]), // Accepts strings, objects, or empty arrays
     }),
 });
 
