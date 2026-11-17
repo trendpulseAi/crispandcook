@@ -2,11 +2,11 @@
 draft: false
 title: "Crispy Miso-Glazed Salmon Bites"
 description: "Get sticky, caramelized air fryer miso salmon bites in just 8 minutes. Crispy edges, juicy centers, and minimal cleanup for an easy weeknight dinner."
-pubDate: 2026-11-17T11:09:46.156Z
+date: 2026-11-17T11:09:46.156Z
 image: "./crispy-miso-glazed-salmon-bites.jpg"
 category: "dinner"
-prepTime: "10 mins"
-cookTime: "8 mins"
+prepMinutes: 10
+cookMinutes: 8
 servings: 4
 appliance: "Air Fryer"
 ---

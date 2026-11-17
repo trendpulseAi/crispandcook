@@ -2,11 +2,11 @@
 draft: false
 title: "Crispy Air Fryer Hot Honey Gochujang Beef Meatballs"
 description: "Make crispy air fryer gochujang meatballs in 12 minutes. Glazed in sweet, fiery hot honey with a deeply browned crust. Fast weeknight dinner."
-pubDate: 2026-11-17T11:19:50.821Z
+date: 2026-11-17T11:19:50.821Z
 image: "./crispy-air-fryer-hot-honey-gochujang-beef-meatballs.jpg"
 category: "dinner"
-prepTime: "15 mins"
-cookTime: "12 mins"
+prepMinutes: 15
+cookMinutes: 12
 servings: 4
 appliance: "Air Fryer"
 ---
