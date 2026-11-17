@@ -1,8 +1,8 @@
 ---
-draft: true
+draft: false
 title: "Rice Cooker Ginger Scallion Chicken and Jasmine Rice"
 description: "Tender ginger scallion chicken and jasmine rice made in a rice cooker in 35 mins. A budget, one-pot dinner with zero cleanup hassle."
-pubDate: 2026-11-17T10:46:32.751Z
+pubDate: 2026-11-17T11:16:41.344Z
 image: "./rice-cooker-ginger-scallion-chicken-and-jasmine-rice.jpg"
 category: "dinner"
 prepTime: "10 mins"
