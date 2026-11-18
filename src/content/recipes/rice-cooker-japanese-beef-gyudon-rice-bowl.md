@@ -2,7 +2,7 @@
 title: "Rice Cooker Japanese Beef Gyudon Rice Bowl"
 description: "Cook sweet, savory Japanese beef and fluffy rice together in your rice cooker in just 30 minutes for an easy, no-fuss weeknight meal."
 date: 2026-11-18
-draft: true
+draft: false
 appliance: "Rice Cooker"
 category: "Lunch"
 cuisine: "Asian-Inspired"
