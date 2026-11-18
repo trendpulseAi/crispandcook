@@ -33,3 +33,20 @@ export function withAmazonTag(url: string, tag: string) {
   u.searchParams.set('tag', tag);
   return u.toString();
 }
+
+/**
+ * Normalises the fields the templates need, so both post formats render:
+ *  - rich format:  date + prepMinutes/cookMinutes (numbers) + ingredients/steps lists
+ *  - simple format (n8n): pubDate + prepTime/cookTime ("10 mins") + Markdown body only
+ */
+export function recipeMeta(d: any) {
+  const toMin = (n: unknown, s: unknown) => {
+    if (typeof n === 'number' && !Number.isNaN(n)) return n;
+    const m = String(s ?? '').match(/\d+/);
+    return m ? parseInt(m[0], 10) : 0;
+  };
+  const prep = toMin(d.prepMinutes, d.prepTime);
+  const cook = toMin(d.cookMinutes, d.cookTime);
+  const date: Date | null = d.date ?? d.pubDate ?? null;
+  return { prep, cook, total: prep + cook, date };
+}
