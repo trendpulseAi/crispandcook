@@ -1,8 +1,8 @@
 ---
-draft: true
+draft: false
 title: "One-Pot Rice Cooker Gochujang Salmon and Edamame Rice"
 description: "Make savory, spicy rice cooker salmon and rice with edamame in 30 minutes. An easy, high-protein weeknight dinner with virtually zero cleanup."
-pubDate: 2026-11-18T15:42:50.354Z
+pubDate: 2026-11-18T15:47:44.172Z
 image: "./one-pot-rice-cooker-gochujang-salmon-and-edamame-rice.jpg"
 category: "dinner"
 prepTime: "10 mins"
