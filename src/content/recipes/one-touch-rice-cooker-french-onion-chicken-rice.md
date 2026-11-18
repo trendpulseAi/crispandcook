@@ -1,8 +1,8 @@
 ---
-draft: true
+draft: false
 title: "One-Touch Rice Cooker French Onion Chicken Rice"
 description: "Tender chicken and savory French onion rice cooked together in one pot in 35 minutes using your standard rice cooker. Cheap, easy dinner."
-pubDate: 2026-11-18T15:45:02.590Z
+pubDate: 2026-11-18T15:48:04.093Z
 image: "./one-touch-rice-cooker-french-onion-chicken-rice.jpg"
 category: "dinner"
 prepTime: "10 mins"
