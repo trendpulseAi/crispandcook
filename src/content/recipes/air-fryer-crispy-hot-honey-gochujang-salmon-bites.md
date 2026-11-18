@@ -2,7 +2,7 @@
 title: "Air Fryer Crispy Hot Honey Gochujang Salmon Bites"
 description: "These sweet, spicy air fryer salmon bites cook in just 8 minutes with crispy edges and a sticky hot honey gochujang glaze."
 date: 2026-11-18
-draft: true
+draft: false
 appliance: "Air Fryer"
 category: "Dinner"
 cuisine: "Asian-Inspired"
