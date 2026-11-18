@@ -1,0 +1,105 @@
+---
+import { render } from 'astro:content';
+import { Image, getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import RecipeSchema from '../../components/RecipeSchema.astro';
+import { getPublishedRecipes, recipeMeta } from '../../lib';
+import { SITE } from '../../site.config.mjs';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedRecipes();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const d = post.data;
+const meta = recipeMeta(d);
+const hasList = (a: any) => Array.isArray(a) && a.length > 0;
+const { Content } = await render(post);
+const og = await getImage({ src: d.image, width: 1200, format: 'jpg' });
+const url = new URL(`/recipes/${post.id}/`, SITE.url).toString();
+const imageUrl = new URL(og.src, SITE.url).toString();
+---
+<Base title={d.title} description={d.description} image={og.src} type="article">
+  <RecipeSchema slot="head" data={d} url={url} imageUrl={imageUrl} />
+  <article class="post">
+    <p class="crumbs small"><a href="/">Home</a> › <a href="/recipes/">Recipes</a> › {d.appliance}</p>
+    <h1>{d.title}</h1>
+    <p class="small">By {SITE.author}{meta.date && <> · {meta.date.toLocaleDateString('en-US', { dateStyle: 'long' })}</>}{meta.total > 0 && <> · {meta.total} min total</>}</p>
+
+    <!-- 1. Jump to Recipe & Print -->
+    <div class="top-buttons no-print">
+      <a class="btn" href="#recipe">⬇ Jump to Recipe</a>
+      <button class="btn btn-ghost" onclick="document.getElementById('recipe').scrollIntoView();setTimeout(()=>window.print(),300)">🖨️ Print Recipe</button>
+    </div>
+    <p class="small disclosure">This post may contain affiliate links. As an Amazon Associate we earn from qualifying purchases. <a href="/disclosure/">Learn more</a>.</p>
+
+    <Image src={d.image} alt={d.imageAlt} width={1200} height={800} class="hero-img" loading="eager" />
+
+    <!-- 2. Hook + Why This Recipe Works -->
+    <div class="hook"><Content /></div>
+    {hasList(d.whyItWorks) && (
+      <>
+        <h2>Why This Recipe Works</h2>
+        <ul class="why">{d.whyItWorks.map((w) => <li>{w}</li>)}</ul>
+      </>
+    )}
+
+    <AdSlot />
+
+    <!-- 3. Ingredients & Smart Substitutions -->
+    {hasList(d.ingredients) && (
+      <>
+        <h2>Ingredients You'll Need</h2>
+        <ul class="ingredients">
+          {d.ingredients.map((i) => <li><strong>{i.amount} {i.item}</strong>{i.why && <> — {i.why}</>}</li>)}
+        </ul>
+      </>
+    )}
+    {hasList(d.substitutions) && (
+      <>
+        <h3>Smart Substitutions</h3>
+        <ul>{d.substitutions.map((s) => <li><strong>No {s.swap}?</strong> {s.with}</li>)}</ul>
+      </>
+    )}
+
+    <AdSlot kind="native" />
+
+    <!-- 4. Step-by-step + Pro Tips -->
+    {hasList(d.steps) && (
+      <>
+        <h2>How to Make It ({d.appliance})</h2>
+        <ol class="steps">
+          {d.steps.map((s, n) => <li id={`step-${n + 1}`}><h3>{s.title}</h3><p>{s.text}</p></li>)}
+        </ol>
+      </>
+    )}
+    {hasList(d.proTips) && (
+      <aside class="tips"><h3>💡 Pro Tips</h3><ul>{d.proTips.map((t) => <li>{t}</li>)}</ul></aside>
+    )}
+
+    <AdSlot />
+
+    <!-- 5. Storage, Freezing & Reheating -->
+    {d.storage && (
+      <>
+        <h2>Storage, Freezing &amp; Reheating</h2>
+        {d.storage.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
+      </>
+    )}
+
+    <!-- 6. FAQs -->
+    {hasList(d.faqs) && (
+      <>
+        <h2>Frequently Asked Questions</h2>
+        <div class="faqs">{d.faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}</div>
+      </>
+    )}
+
+    <AdSlot />
+
+    <!-- 7. Recipe card -->
+    <RecipeCard data={d} />
+  </article>
+</Base>
