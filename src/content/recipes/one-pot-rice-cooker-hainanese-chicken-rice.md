@@ -2,7 +2,7 @@
 title: "One-Pot Rice Cooker Hainanese Chicken Rice"
 description: "Make tender chicken and fragrant ginger-garlic rice in 35 minutes using your rice cooker for an easy, savory weeknight dinner."
 date: 2026-11-18
-draft: true
+draft: false
 appliance: "Rice Cooker"
 category: "Dinner"
 cuisine: "Asian-Inspired"
