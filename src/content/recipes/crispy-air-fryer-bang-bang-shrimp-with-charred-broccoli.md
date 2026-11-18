@@ -1,8 +1,8 @@
 ---
-draft: true
+draft: false
 title: "Crispy Air Fryer Bang Bang Shrimp with Charred Broccoli"
 description: "Make crispy air fryer bang bang shrimp and charred broccoli in just 12 minutes. Sweet, spicy, and crunchy without deep-frying."
-pubDate: 2026-11-18T15:43:58.391Z
+pubDate: 2026-11-18T15:47:54.688Z
 image: "./crispy-air-fryer-bang-bang-shrimp-with-charred-broccoli.jpg"
 category: "dinner"
 prepTime: "10 mins"
