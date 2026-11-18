@@ -32,6 +32,7 @@ const ogImage = image ? new URL(image, SITE.url).toString() : undefined;
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="pinterest-rich-pin" content="true" />
+    <meta name="p:domain_verify" content="69761661d59e7b365c44e3dcd70ae3dd" />
     <slot name="head" />
     {SITE.ga4Id && (
       <>
