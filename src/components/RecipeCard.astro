@@ -1,9 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import { SITE } from '../site.config.mjs';
-import { withAmazonTag } from '../lib';
+import { withAmazonTag, recipeMeta } from '../lib';
 const { data } = Astro.props;
-const total = data.prepMinutes + data.cookMinutes;
+const meta = recipeMeta(data);
+const has = (a: any) => Array.isArray(a) && a.length > 0;
 ---
 <section id="recipe" class="recipe-card">
   <div class="rc-head">
@@ -15,14 +16,14 @@ const total = data.prepMinutes + data.cookMinutes;
     </div>
   </div>
   <ul class="rc-meta">
-    <li><span>Prep</span>{data.prepMinutes} min</li>
-    <li><span>Cook</span>{data.cookMinutes} min</li>
-    <li><span>Total</span>{total} min</li>
+    {meta.prep > 0 && <li><span>Prep</span>{meta.prep} min</li>}
+    {meta.cook > 0 && <li><span>Cook</span>{meta.cook} min</li>}
+    {meta.total > 0 && <li><span>Total</span>{meta.total} min</li>}
     <li><span>Servings</span>{data.servings}</li>
     {data.calories && <li><span>Calories</span>{data.calories}</li>}
     <li><span>Appliance</span>{data.appliance}</li>
   </ul>
-  {data.equipment.length > 0 && (
+  {has(data.equipment) && (
     <div class="rc-block no-print">
       <h3>Equipment</h3>
       <ul>
@@ -32,15 +33,19 @@ const total = data.prepMinutes + data.cookMinutes;
       </ul>
     </div>
   )}
-  <div class="rc-block">
-    <h3>Ingredients</h3>
-    <ul class="checklist">
-      {data.ingredients.map((i) => <li><label><input type="checkbox" /> <strong>{i.amount}</strong> {i.item}</label></li>)}
-    </ul>
-  </div>
-  <div class="rc-block">
-    <h3>Instructions</h3>
-    <ol>{data.steps.map((s) => <li><strong>{s.title}.</strong> {s.text}</li>)}</ol>
-  </div>
+  {has(data.ingredients) && (
+    <div class="rc-block">
+      <h3>Ingredients</h3>
+      <ul class="checklist">
+        {data.ingredients.map((i) => <li><label><input type="checkbox" /> <strong>{i.amount}</strong> {i.item}</label></li>)}
+      </ul>
+    </div>
+  )}
+  {has(data.steps) && (
+    <div class="rc-block">
+      <h3>Instructions</h3>
+      <ol>{data.steps.map((s) => <li><strong>{s.title}.</strong> {s.text}</li>)}</ol>
+    </div>
+  )}
   {data.calories && <p class="small">Nutrition is an estimate per serving and will vary by brand and portion size.</p>}
 </section>

@@ -1,13 +1,15 @@
 ---
 import { Image } from 'astro:assets';
+import { recipeMeta } from '../lib';
 const { post } = Astro.props;
 const d = post.data;
+const meta = recipeMeta(d);
 ---
 <a class="post-card" href={`/recipes/${post.id}/`}>
   <Image src={d.image} alt={d.imageAlt} width={480} height={360} />
   <div class="pc-body">
     <span class="tag">{d.appliance}</span>
     <h3>{d.title}</h3>
-    <p class="small">{d.prepMinutes + d.cookMinutes} min · {d.servings} servings</p>
+    <p class="small">{meta.total > 0 ? `${meta.total} min · ` : ''}{d.servings} servings</p>
   </div>
 </a>

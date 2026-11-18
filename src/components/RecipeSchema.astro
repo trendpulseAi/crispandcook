@@ -1,38 +1,54 @@
 ---
 import { SITE } from '../site.config.mjs';
-import { isoDuration } from '../lib';
+import { isoDuration, recipeMeta } from '../lib';
 const { data, url, imageUrl } = Astro.props;
-const schema = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Recipe',
-      name: data.title,
-      description: data.description,
-      image: [imageUrl],
-      author: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-      datePublished: data.date.toISOString().slice(0, 10),
-      prepTime: isoDuration(data.prepMinutes),
-      cookTime: isoDuration(data.cookMinutes),
-      totalTime: isoDuration(data.prepMinutes + data.cookMinutes),
-      recipeYield: `${data.servings} servings`,
-      recipeCategory: data.category,
-      recipeCuisine: data.cuisine,
-      keywords: [data.appliance, ...data.keywords].join(', '),
-      tool: data.equipment.map((e) => ({ '@type': 'HowToTool', name: e.name })),
-      recipeIngredient: data.ingredients.map((i) => `${i.amount} ${i.item}`.trim()),
-      recipeInstructions: data.steps.map((s, n) => ({
-        '@type': 'HowToStep', name: s.title, text: s.text, url: `${url}#step-${n + 1}`,
-      })),
-      ...(data.calories ? { nutrition: { '@type': 'NutritionInformation', calories: `${data.calories} calories` } } : {}),
-    },
-    {
-      '@type': 'FAQPage',
-      mainEntity: data.faqs.map((f) => ({
-        '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
-    },
-  ],
-};
+const meta = recipeMeta(data);
+const datePublished = meta.date ? meta.date.toISOString().slice(0, 10) : undefined;
+const author = { '@type': 'Organization', name: SITE.name, url: SITE.url };
+// A Recipe schema needs real ingredient + step lists; posts without them (simple n8n format) get a plain Article schema.
+const hasRecipe = data.ingredients.length > 0 && data.steps.length > 0;
+
+const graph: any[] = [];
+if (hasRecipe) {
+  graph.push({
+    '@type': 'Recipe',
+    name: data.title,
+    description: data.description,
+    image: [imageUrl],
+    author,
+    ...(datePublished ? { datePublished } : {}),
+    prepTime: isoDuration(meta.prep),
+    cookTime: isoDuration(meta.cook),
+    totalTime: isoDuration(meta.total),
+    recipeYield: `${data.servings} servings`,
+    recipeCategory: data.category,
+    recipeCuisine: data.cuisine,
+    keywords: [data.appliance, ...data.keywords].join(', '),
+    tool: (Array.isArray(data.equipment) ? data.equipment : []).map((e) => ({ '@type': 'HowToTool', name: e.name })),
+    recipeIngredient: data.ingredients.map((i) => `${i.amount} ${i.item}`.trim()),
+    recipeInstructions: data.steps.map((s, n) => ({
+      '@type': 'HowToStep', name: s.title, text: s.text, url: `${url}#step-${n + 1}`,
+    })),
+    ...(data.calories ? { nutrition: { '@type': 'NutritionInformation', calories: `${data.calories} calories` } } : {}),
+  });
+} else {
+  graph.push({
+    '@type': 'Article',
+    headline: data.title,
+    description: data.description,
+    image: [imageUrl],
+    author,
+    ...(datePublished ? { datePublished } : {}),
+  });
+}
+if (data.faqs.length > 0) {
+  graph.push({
+    '@type': 'FAQPage',
+    mainEntity: data.faqs.map((f) => ({
+      '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  });
+}
+const schema = { '@context': 'https://schema.org', '@graph': graph };
 ---
 <script type="application/ld+json" set:html={JSON.stringify(schema)} />
